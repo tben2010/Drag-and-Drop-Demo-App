@@ -10,6 +10,7 @@ import UIKit
 extension DragBoardViewController : UIDragInteractionDelegate {
     
     func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        print(#function)
         let point = session.location(in: interaction.view)
         
         if let index = imageIndex(at: point) {
@@ -30,11 +31,13 @@ extension DragBoardViewController : UIDragInteractionDelegate {
     }
     
     func dragInteraction(_ interaction: UIDragInteraction, previewForLifting item: UIDragItem, session: UIDragSession) -> UITargetedDragPreview? {
+        print(#function)
         let index = item.localObject as! Int
         return UITargetedDragPreview(view: views[index])
     }
     
     func dragInteraction(_ interaction: UIDragInteraction, willAnimateLiftWith animator: UIDragAnimating, session: UIDragSession) {
+        print(#function)
         animator.addCompletion { position in
             // If the lift ended and the user is dragging the image,
             // we want to give a visual cue that the original item is
@@ -46,6 +49,7 @@ extension DragBoardViewController : UIDragInteractionDelegate {
     }
     
     func dragInteraction(_ interaction: UIDragInteraction, item: UIDragItem, willAnimateCancelWith animator: UIDragAnimating) {
+        print(#function)
         // We restore the alpha of the item being dragged from 0.5 back to 1.
         animator.addAnimations {
             self.fade(items: [item], alpha: 1)
@@ -53,6 +57,7 @@ extension DragBoardViewController : UIDragInteractionDelegate {
     }
     
     func dragInteraction(_ interaction: UIDragInteraction, session: UIDragSession, willEndWith operation: UIDropOperation) {
+        print(#function)
         if operation == .copy {
             // The items in the pin board are being copied by another application:
             // this is our chance to change the alpha of the dragged items back to 1.

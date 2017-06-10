@@ -10,6 +10,7 @@ import UIKit
 extension DragBoardViewController : UIDropInteractionDelegate {
     
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        print(#function)
         return session.canLoadObjects(ofClass: UIImage.self)
     }
     
@@ -26,6 +27,7 @@ extension DragBoardViewController : UIDropInteractionDelegate {
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        print(#function)
         if session.localDragSession == nil {
             dropPoint = session.location(in: interaction.view)
 
@@ -36,6 +38,7 @@ extension DragBoardViewController : UIDropInteractionDelegate {
     }
 
     func dropInteraction(_ interaction: UIDropInteraction, previewForDropping item: UIDragItem, withDefault defaultPreview: UITargetedDragPreview) -> UITargetedDragPreview? {
+        print(#function)
         if item.localObject == nil {
             // The item comes from another application: we return nil so that
             // the preview shrinks down and fades out at the current location.
@@ -52,6 +55,7 @@ extension DragBoardViewController : UIDropInteractionDelegate {
     
     func dropInteraction(_ interaction: UIDropInteraction, item: UIDragItem, willAnimateDropWith animator: UIDragAnimating) {
         animator.addAnimations {
+            print(#function)
             // If the item already exists, it fades
             // out the image in the previous location.
             self.fade(items: [item], alpha: 0)
